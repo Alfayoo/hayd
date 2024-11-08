@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Baby</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Colors */
+        :root {
+            --header-footer-color: #3D0066; /* Deep Purple */
+            --button-color: #8A2E5D; /* Muted Dark Pink */
+            --background-color: #1A1A1A; /* Very Dark Gray */
+            --text-color: #EDEDED; /* Light Gray */
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Lora', serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        /* Full-Screen Sections */
+        section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--header-footer-color);
+            color: white;
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Scroll Down Button */
+        #scrollBtn {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background-color: var(--button-color);
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        #scrollBtn:hover {
+            background-color: var(--header-footer-color);
+            color: white;
+        }
+
+        /* Carousel */
+        .carousel {
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            margin: 0 auto;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+        }
+
+        .carousel-item img,
+        .carousel-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-buttons button {
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .carousel-buttons button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--header-footer-color);
+            color: white;
+            width: 100%;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <section>Hey Baby</section>
+    </header>
+
+    <!-- Scroll Down Button Section -->
+    <section>
+        <button id="scrollBtn" onclick="scrollToCarousel()">Scroll Down</button>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel">
+        <div class="carousel-track">
+            <div class="carousel-item"><img src="images/c25a6580-8a14-432f-acab-ea140b4f1cfd.jpeg" alt="Image 1"></div>
+            <div class="carousel-item"><video src="images/Hayden.mp4" autoplay muted loop></video></div>
+          
+        </div>
+        <div class="carousel-buttons">
+            <button id="prevBtn">&#10094;</button>
+            <button id="nextBtn">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <section>
+            I found peace and love in you Babe, no one else will ever have my love except for you (and my mom lol). I am loyal to you now and I will always be loyal to you.
+           So Smile coz I might not see it right now but one day I will be seeing it all day❤️❤️❤️
+        </section>
+    </footer>
+
+    <script>
+        // Scroll down to carousel section
+        function scrollToCarousel() {
+            document.querySelector('.carousel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Carousel Functionality
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track.children);
+        const prevButton = document.getElementById('prevBtn');
+        const nextButton = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const width = items[0].getBoundingClientRect().width;
+            track.style.transform = 'translateX(-' + width * currentIndex + 'px)';
+        }
+
+        // Auto-rotate
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }, 3000);
+
+        // Button Controls
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        });
+    </script>
+
+</body>
+</html>
